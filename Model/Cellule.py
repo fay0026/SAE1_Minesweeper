@@ -28,3 +28,17 @@ def isContenuCorrect(en: int) -> bool:
     else :
         retour = False
     return retour
+
+def construireCellule(cont: int = 0, visi: bool = False) -> dict:
+    if isContenuCorrect(cont) == False:
+        raise ValueError(f" construireCellule : le contenu"
+                         f" {cont} n’est pas correct")
+    if type(visi) != bool:
+        raise TypeError(f"construireCellule : le second "
+                        f"paramètre {type(visi)} "
+                        f"n’est pas un booléen")
+    if cont == -1:
+        dico = {'const.ID_MINE' : cont, 'const.VISIBLE' : visi}
+    else :
+        dico = {'const.CONTENU' : cont, 'const.VISIBLE' : visi}
+    return dico
