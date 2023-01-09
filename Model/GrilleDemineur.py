@@ -96,3 +96,8 @@ def getCelluleGrilleDemineur(grille: list, coord: tuple) -> int :
                          f"contenue dans la grille.")
     return grille[coord[0]][coord[1]]
 
+def getContenuGrilleDemineur(grille: list, coord: tuple) -> int:
+    return getContenuCellule(getCelluleGrilleDemineur(grille, coord))
+
+def setContenuGrilleDemineur(grille: list, coord: tuple, cont: int) -> None:
+    return setContenuCellule(getCelluleGrilleDemineur(grille, coord), cont)
