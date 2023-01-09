@@ -44,3 +44,40 @@ def isContenuCorrect(en: int) -> bool:
     #print(type(dico))
     #return dico
 
+def getContenuCellule(dico: dict) -> int:
+    if type_cellule(dico) == False :
+        raise TypeError(f"getContenuCellule : Le paramètre n'est pas une cellule.")
+    return dico['const.CONTENU']
+
+def isVisibleCellule(dico: dict) -> bool:
+    if type_cellule(dico) == False :
+        raise TypeError(f"getContenuCellule : Le paramètre n'est pas une cellule.")
+    return dico['const.VISIBLE']
+
+def setContenuCellule(dico: dict, cont: int) -> None:
+    if type_cellule(dico) == False :
+        raise TypeError(f"getContenuCellule : Le premier paramètre n'est pas une cellule.")
+    if cont != int :
+        raise TypeError(f"setContenuCellule : Le second paramètre n'est pas un entier")
+    if isContenuCorrect(cont) == False:
+        raise ValueError(f"setContenuCellule : la valeur du contenu {cont} n'est"
+                         f"pas correcte.")
+    dico['const.CONTENU'] = cont
+    return dico
+
+def setVisibleCellule(dico: dict, visi: bool) -> None:
+    if type_cellule(dico) == False :
+        raise TypeError(f"getContenuCellule : Le premier paramètre n'est pas une cellule.")
+    if visi != bool:
+        raise TypeError(f"setContenuCellule : Le second paramètre n'est pas un entier")
+    dico['const.VISIBLE'] = visi
+    return dico
+
+def contientMineCellule(dico: dict) -> bool:
+    if type_cellule(dico) == False :
+        raise TypeError(f"getContenuCellule : Le paramètre n'est pas une cellule.")
+    presence = False
+    if dico['const.CONTENU'] == -1:
+        presence = True
+    return presence
+
