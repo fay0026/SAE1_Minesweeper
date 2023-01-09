@@ -26,7 +26,6 @@ class TestCelluleMethods(unittest.TestCase):
         l_v = list(range(0, 9)) + [const.ID_MINE]
         for _v in l_v:
             c = construireCellule(_v, False)
-            print(c)
             self.assertTrue(type_cellule(c),
                             f"Erreur sur la construction de cellule avec contenu = {c}, visible = True")
             c = construireCellule(_v, True)
@@ -160,6 +159,7 @@ class TestCelluleMethods(unittest.TestCase):
                      "Constructeur ou contientMineCellule non écrit")
     def test_contientMineCellule(self):
         cell = construireCellule(const.ID_MINE, False)
+        print(cell)
         self.assertTrue(contientMineCellule(cell))
         cell = construireCellule(const.ID_MINE, True)
         self.assertTrue(contientMineCellule(cell))
