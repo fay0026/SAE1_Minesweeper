@@ -26,6 +26,7 @@ class TestCelluleMethods(unittest.TestCase):
         l_v = list(range(0, 9)) + [const.ID_MINE]
         for _v in l_v:
             c = construireCellule(_v, False)
+            print(c)
             self.assertTrue(type_cellule(c),
                             f"Erreur sur la construction de cellule avec contenu = {c}, visible = True")
             c = construireCellule(_v, True)
