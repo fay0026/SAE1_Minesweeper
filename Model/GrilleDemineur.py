@@ -59,12 +59,11 @@ def construireGrilleDemineur(nl: int, nc: int):
     if type(nl) != int or type(nc) != int :
         raise TypeError(f"construireGrilleDemineur : Le nombre de lignes "
                         f"{nl} ou de colonnes {nl} n’est pas un entier. ")
-    cellTemp = construireCellule()
     lisTemp = []
     grille = []
     for i in range(nl):
         for j in range(nc):
-            lisTemp.append(cellTemp)
+            lisTemp.append(construireCellule())
         grille.append(lisTemp)
         lisTemp = []
     return grille
@@ -88,7 +87,7 @@ def isCoordonneeCorrecte(grille: list, coord: tuple) -> bool :
         check = True
     return check
 
-def getCelluleGrilleDemineur(grille: list, coord: tuple) -> int :
+def getCelluleGrilleDemineur(grille: list, coord: tuple) -> dict :
     if type(coord) != tuple or len(coord) > 2 or type_grille_demineur(grille) == False :
         raise TypeError(f"isCoordonneeCorrecte : un des paramètres n’est pas du bon type.")
     if isCoordonneeCorrecte(grille, coord) == False :
@@ -118,7 +117,6 @@ def getCoordonneeVoisinsGrilleDemineur(grille: list, coord: tuple) -> list:
     if isCoordonneeCorrecte(grille, coord) == False :
         raise IndexError(f"getCoordonneeVoisinsGrilleDemineur : la coordonnée n’est pas dans la grille")
     coordVoisins = []
-    coordTemp = (())
     #Test de chaque case à partir de [0]+1, jusqu'à [0]-1 [1]+1
     if isCoordonneeCorrecte(grille, (coord[0]+1, coord[1])) :
         coordVoisins.append((coord[0]+1, coord[1]))
@@ -139,3 +137,17 @@ def getCoordonneeVoisinsGrilleDemineur(grille: list, coord: tuple) -> list:
     print(type(coordVoisins))
     return coordVoisins
 
+def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
+    if nb <= 0 or nb >= (getNbLignesGrilleDemineur(grille) * getNbColonnesGrilleDemineur(grille)) :
+        raise ValueError(f"« placerMinesGrilleDemineur : Nombre de bombes à placer incorrect ")
+    if isCoordonneeCorrecte(grille, coord) == False:
+        raise IndexError(f"placerMinesGrilleDemineur : la coordonnée n’est pas dans la grille.")
+    ranCoord = ((randint(0, getNbLignesGrilleDemineur(grille) - 1)),
+                ((randint(0, getNbColonnesGrilleDemineur(grille) - 1))))
+    for i in range(nb):
+        while ranCoord == coord or contientMineGrilleDemineur(grille, ranCoord) == True:
+            ranCoord = ((randint(0, getNbLignesGrilleDemineur(grille)-1)),
+                        ((randint(0, getNbColonnesGrilleDemineur(grille)-1))))
+        cellTemp = getCelluleGrilleDemineur(grille, ranCoord)
+        setContenuCellule(cellTemp, -1)
+    return None

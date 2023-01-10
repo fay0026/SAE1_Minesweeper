@@ -17,4 +17,18 @@ from random import randint
 #print(isCoordonneeCorrecte(construireGrilleDemineur(2,3), (1,1)))
 #print(isCoordonneeCorrecte(construireGrilleDemineur(2,3), (2,3)))
 
-print(getCoordonneeVoisinsGrilleDemineur(construireGrilleDemineur(2,3), ((1,1))))
+#print(getCoordonneeVoisinsGrilleDemineur(construireGrilleDemineur(2,3), ((1,1))))
+
+ranCoord = (())
+grille = construireGrilleDemineur(2,3)
+randint(0,5)
+for i in range(10):
+    print(len(grille))
+    print(len(grille[0]))
+    coordTemp1 = randint(0, len(grille)-1)
+    coordTemp2 = randint(0, len(grille[0])-1)
+    ranCoord = (coordTemp1, coordTemp2)
+    if isCoordonneeCorrecte(grille, ranCoord) == False :
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    print(ranCoord)
+    print(type(ranCoord))
