@@ -177,10 +177,25 @@ def getNbMinesGrilleDemineur(grille: list) -> int:
 def getAnnotationGrilleDemineur(grille: list, coord: tuple) -> str:
     return getAnnotationCellule(getCelluleGrilleDemineur(grille, coord))
 
-def getMinesRestantesGrilleDemineur(grille) -> int:
+def getMinesRestantesGrilleDemineur(grille: list) -> int:
     compteur = 0
     for i in range(getNbLignesGrilleDemineur(grille)):
         for j in range(getNbColonnesGrilleDemineur(grille)):
             if getCelluleGrilleDemineur(grille, (i,j))[const.ANNOTATION] == const.FLAG:
                 compteur += 1
     return getNbMinesGrilleDemineur(grille) - compteur
+
+def gagneGrilleDemineur(grille: list) -> bool:
+    CasesNope = getNbLignesGrilleDemineur(grille) * getNbColonnesGrilleDemineur(grille)
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
+            if contientMineGrilleDemineur(grille, (i,j)) == True and getCelluleGrilleDemineur(grille, (i,j))[const.ANNOTATION] \
+                    == const.FLAG and getCelluleGrilleDemineur(grille, (i,j))[const.VISIBLE] == False :
+                CasesNope -= 1
+            elif getCelluleGrilleDemineur(grille, (i,j))[const.VISIBLE] == True and contientMineGrilleDemineur(grille, (i,j)) == False :
+                CasesNope -= 1
+    if CasesNope == 0:
+        retour = True
+    else :
+        retour = False
+    return retour

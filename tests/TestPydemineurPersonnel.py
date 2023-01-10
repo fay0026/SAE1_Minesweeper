@@ -20,37 +20,38 @@ from random import randint
 
 #print(getCoordonneeVoisinsGrilleDemineur(construireGrilleDemineur(2,3), ((1,1))))
 
-ranCoord = (())
-grille = construireGrilleDemineur(2,3)
-randint(0,5)
-for i in range(10):
-    print(len(grille))
-    print(len(grille[0]))
-    coordTemp1 = randint(0, len(grille)-1)
-    coordTemp2 = randint(0, len(grille[0])-1)
-    ranCoord = (coordTemp1, coordTemp2)
-    if isCoordonneeCorrecte(grille, ranCoord) == False :
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-    print(ranCoord)
-    print(type(ranCoord))
+#ranCoord = (())
+#grille = construireGrilleDemineur(2,3)
+#randint(0,5)
+#for i in range(10):
+    #print(len(grille))
+    #print(len(grille[0]))
+    #coordTemp1 = randint(0, len(grille)-1)
+    #coordTemp2 = randint(0, len(grille[0])-1)
+    #ranCoord = (coordTemp1, coordTemp2)
+    #if isCoordonneeCorrecte(grille, ranCoord) == False :
+        #print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    #print(ranCoord)
+    #print(type(ranCoord))
 
-for i in range(4):
-    print(i)
+#for i in range(4):
+    #print(i)
 
-word_freq = {
-    "Hello": 56,
-    "at": 23,
-     const.ANNOTATION : 43,
-    "this": 78
+#word_freq = {
+    #"Hello": 56,
+    #"at": 23,
+     #const.ANNOTATION : 43,
+    #"this": 78
 }
-key = const.ANNOTATION
+#key = const.ANNOTATION
 
-if key in word_freq:
-    print(f"Yes, key: '{key}' exists in dictionary")
-else:
-    print(f"No, key: '{key}' does not exists in dictionary")
+#if key in word_freq:
+    #print(f"Yes, key: '{key}' exists in dictionary")
+#else:
+    #print(f"No, key: '{key}' does not exists in dictionary")
 
-cell = {const.CONTENU: 0, const.VISIBLE: False}
-print(getAnnotationCellule(cell))
-print("important")
-print(isAnnotationCorrecte("N'importe quoi !"))
+#cell = {const.CONTENU: 0, const.VISIBLE: False}
+#print(getAnnotationCellule(cell))
+#print("important")
+#print(isAnnotationCorrecte("N'importe quoi !"))
+

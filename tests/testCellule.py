@@ -159,7 +159,6 @@ class TestCelluleMethods(unittest.TestCase):
                      "Constructeur ou contientMineCellule non écrit")
     def test_contientMineCellule(self):
         cell = construireCellule(const.ID_MINE, False)
-        print(cell)
         self.assertTrue(contientMineCellule(cell))
         cell = construireCellule(const.ID_MINE, True)
         self.assertTrue(contientMineCellule(cell))
