@@ -134,7 +134,6 @@ def getCoordonneeVoisinsGrilleDemineur(grille: list, coord: tuple) -> list:
         coordVoisins.append((coord[0]+1, coord[1]-1))
     if isCoordonneeCorrecte(grille, (coord[0]-1, coord[1]+1)) :
         coordVoisins.append((coord[0]-1, coord[1]+1))
-    print(type(coordVoisins))
     return coordVoisins
 
 def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
@@ -150,16 +149,17 @@ def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
                         ((randint(0, getNbColonnesGrilleDemineur(grille)-1))))
         cellTemp = getCelluleGrilleDemineur(grille, ranCoord)
         setContenuCellule(cellTemp, -1)
+    compterMinesVoisinesGrilleDemineur(grille)
     return None
 
 def compterMinesVoisinesGrilleDemineur(grille: list) -> None:
     for i in range(getNbLignesGrilleDemineur(grille)):
         for j in range(getNbColonnesGrilleDemineur(grille)):
             if contientMineGrilleDemineur(grille, (i,j)) == False :
-                voisinsTemp = getCoordonneeVoisinsGrilleDemineur(grille, i,j)
+                voisinsTemp = getCoordonneeVoisinsGrilleDemineur(grille, (i,j))
                 compteur = 0
                 for k in range(len(voisinsTemp)):
-                    if contientMineCellule(voisinsTemp[k]) == True :
+                    if contientMineCellule(getCelluleGrilleDemineur(grille, voisinsTemp[k])) == True :
                         compteur += 1
                 setContenuGrilleDemineur(grille, (i,j), compteur)
     return None
