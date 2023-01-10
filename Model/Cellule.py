@@ -61,13 +61,13 @@ def setContenuCellule(cell: dict, cont: int) -> None:
     cell[const.CONTENU] = cont
     return cell
 
-def setVisibleCellule(dico: dict, visi: bool) -> None:
-    if type_cellule(dico) == False :
+def setVisibleCellule(cell: dict, visi: bool) -> None:
+    if type_cellule(cell) == False :
         raise TypeError(f"getContenuCellule : Le premier paramètre n'est pas une cellule.")
     if type(visi) != bool:
         raise TypeError(f"setContenuCellule : Le second paramètre n'est pas un entier")
-    dico[const.VISIBLE] = visi
-    return dico
+    cell[const.VISIBLE] = visi
+    return cell
 
 def contientMineCellule(cell: dict) -> bool:
     if type_cellule(cell) == False :
