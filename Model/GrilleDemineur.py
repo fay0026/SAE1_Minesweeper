@@ -101,3 +101,14 @@ def getContenuGrilleDemineur(grille: list, coord: tuple) -> int:
 
 def setContenuGrilleDemineur(grille: list, coord: tuple, cont: int) -> None:
     return setContenuCellule(getCelluleGrilleDemineur(grille, coord), cont)
+
+def isVisibleGrilleDemineur(grille: list, coord: tuple) -> bool:
+    return isVisibleCellule(getCelluleGrilleDemineur(grille, coord))
+
+def setVisibleGrilleDemineur(grille: list, coord: tuple, visi: bool) -> None:
+    setVisibleCellule(getCelluleGrilleDemineur(grille, coord), visi)
+    return None
+
+def contientMineGrilleDemineur(grille: list, coord: tuple) -> bool:
+    return contientMineCellule(getCelluleGrilleDemineur(grille, coord))
+
