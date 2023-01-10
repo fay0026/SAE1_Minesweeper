@@ -32,3 +32,6 @@ for i in range(10):
         print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     print(ranCoord)
     print(type(ranCoord))
+
+for i in range(4):
+    print(i)
