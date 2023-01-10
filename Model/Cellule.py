@@ -91,6 +91,5 @@ def getAnnotationCellule(cell: dict) -> str:
         retour = None
     else :
         retour = cell[const.ANNOTATION]
-    print(retour)
     return retour
 
