@@ -11,7 +11,6 @@ try:
 except ImportError:
     scientific_modules_installed = False
 
-
 class TestGrilleDemineur(unittest.TestCase):
 
     def __print__(self, grille):
