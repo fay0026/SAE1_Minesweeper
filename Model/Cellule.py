@@ -104,3 +104,6 @@ def changeAnnotationCellule(cell: dict) -> None:
     elif cell[const.ANNOTATION] == const.DOUTE :
         cell[const.ANNOTATION] = None
 
+def reinitialiserCellule(cell: dict) -> None:
+    cell = construireCellule()
+    return None

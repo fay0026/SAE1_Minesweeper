@@ -207,3 +207,9 @@ def perduGrilleDemineur(grille: list) -> bool :
             if contientMineGrilleDemineur(grille, (i, j)) == True and getCelluleGrilleDemineur(grille, (i,j))[const.VISIBLE] == True :
                 perdu = True
     return perdu
+
+def reinitialiserGrilleDemineur(grille: list) -> None:
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
+            reinitialiserCellule(getCelluleGrilleDemineur(grille, (i, j)))
+    return None
