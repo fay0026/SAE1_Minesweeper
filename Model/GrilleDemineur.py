@@ -151,3 +151,15 @@ def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
         cellTemp = getCelluleGrilleDemineur(grille, ranCoord)
         setContenuCellule(cellTemp, -1)
     return None
+
+def compterMinesVoisinesGrilleDemineur(grille: list) -> None:
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
+            if contientMineGrilleDemineur(grille, (i,j)) == False :
+                voisinsTemp = getCoordonneeVoisinsGrilleDemineur(grille, i,j)
+                compteur = 0
+                for k in range(len(voisinsTemp)):
+                    if contientMineCellule(voisinsTemp[k]) == True :
+                        compteur += 1
+                setContenuGrilleDemineur(grille, (i,j), compteur)
+    return None
