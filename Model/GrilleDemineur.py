@@ -213,3 +213,13 @@ def reinitialiserGrilleDemineur(grille: list) -> None:
         for j in range(getNbColonnesGrilleDemineur(grille)):
             reinitialiserCellule(getCelluleGrilleDemineur(grille, (i, j)))
     return None
+
+def decouvrirGrilleDemineur(grille: list, coord: tuple, aDecouvrir = set()) -> set:
+    aDecouvrir.add(coord)
+    if getCelluleGrilleDemineur(grille, coord)[const.CONTENU] == 0:
+        voisins = getCoordonneeVoisinsGrilleDemineur(grille, coord)
+        for i in range(len(voisins)):
+            if getCelluleGrilleDemineur(grille, voisins[i])[const.CONTENU] == 0 and voisins[i] not in aDecouvrir:
+                aDecouvrir.add(voisins[i])
+                decouvrirGrilleDemineur(grille, voisins[i], aDecouvrir)
+    return aDecouvrir
