@@ -13,6 +13,8 @@ from random import randint
 #print(construireCellule(-1, True))
 #print(construireCellule())
 
-print(isCoordonneeCorrecte(construireGrilleDemineur(2,3), (0,0)))
-print(isCoordonneeCorrecte(construireGrilleDemineur(2,3), (1,1)))
-print(isCoordonneeCorrecte(construireGrilleDemineur(2,3), (2,3)))
+#print(isCoordonneeCorrecte(construireGrilleDemineur(2,3), (0,0)))
+#print(isCoordonneeCorrecte(construireGrilleDemineur(2,3), (1,1)))
+#print(isCoordonneeCorrecte(construireGrilleDemineur(2,3), (2,3)))
+
+print(getCoordonneeVoisinsGrilleDemineur(construireGrilleDemineur(2,3), ((1,1))))
