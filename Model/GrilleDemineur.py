@@ -195,7 +195,15 @@ def gagneGrilleDemineur(grille: list) -> bool:
             elif getCelluleGrilleDemineur(grille, (i,j))[const.VISIBLE] == True and contientMineGrilleDemineur(grille, (i,j)) == False :
                 CasesNope -= 1
     if CasesNope == 0:
-        retour = True
+        gagne = True
     else :
-        retour = False
-    return retour
+        gagne = False
+    return gagne
+
+def perduGrilleDemineur(grille: list) -> bool :
+    perdu = False
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
+            if contientMineGrilleDemineur(grille, (i, j)) == True and getCelluleGrilleDemineur(grille, (i,j))[const.VISIBLE] == True :
+                perdu = True
+    return perdu
