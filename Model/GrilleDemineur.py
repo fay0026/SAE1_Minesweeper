@@ -228,20 +228,25 @@ def decouvrirGrilleDemineur(grille: list, coord: tuple) -> set:
                     aDecouvrir.add(cellule)
     return aDecouvrir
 
-#def simplifierGrilleDemineur(grille: list, coord: tuple, simple = set()):
-    #print(f"JE TESTE {simple}")
-    #if simple != ():
-        #voisins = getCoordonneeVoisinsGrilleDemineur(grille, coord)
-        #for i in range(len(voisins)):
-            #if getCelluleGrilleDemineur(grille, voisins[i])[const.ANNOTATION] == const.FLAG :
-                #if getCelluleGrilleDemineur(grille, voisins[i])[const.CONTENU] == const.FLAG :
-                    #for j in range(len(voisins)):
-                        #if getCelluleGrilleDemineur(grille, voisins[i])[const.VISIBLE] == False :
-                            #getCelluleGrilleDemineur(grille, voisins[j])[const.VISIBLE] = True
-                            #simple.add(voisins[j])
-                            #simplifierGrilleDemineur(grille, voisins[j])
-    #else:
-        #if getCelluleGrilleDemineur(grille, coord)[const.VISIBLE] == True:
-            #simple.add(coord)
-            #simplifierGrilleDemineur(grille, coord, simple)
-    #return simple
+def simplifierGrilleDemineur(grille: list, coord: tuple) -> set:
+    print(f"FONCTION LANCÉ")
+    Simplification = set()
+    compteur = 0
+    if getCelluleGrilleDemineur(grille, coord)[const.VISIBLE] == True:
+        Simplification.add(coord)
+        voisins = getCoordonneeVoisinsGrilleDemineur(grille, coord)
+        print(f"CELLULE ELIGIBLE")
+        for i in range(len(voisins)):
+            if getCelluleGrilleDemineur(grille, voisins[i])[const.ANNOTATION] == const.FLAG :
+                print(f"FLAG COMPTÉ")
+                compteur += 1
+        if getCelluleGrilleDemineur(grille, coord)[const.CONTENU] == compteur :
+            print(f"RÉCURSIF")
+            for j in range(len(voisins)):
+                if getCelluleGrilleDemineur(grille, voisins[j])[const.VISIBLE] == False and getCelluleGrilleDemineur(grille, voisins[j])[const.ANNOTATION] != const.FLAG:
+                    getCelluleGrilleDemineur(grille, voisins[j])[const.VISIBLE] = True
+                    Recursif = simplifierGrilleDemineur(grille, voisins[j])
+                    for cellule in Recursif:
+                        Simplification.add(cellule)
+                    print(Simplification)
+    return Simplification
