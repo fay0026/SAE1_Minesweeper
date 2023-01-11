@@ -65,7 +65,7 @@ def setVisibleCellule(cell: dict, visi: bool) -> None:
     if type_cellule(cell) == False :
         raise TypeError(f"getContenuCellule : Le premier paramètre n'est pas une cellule.")
     if type(visi) != bool:
-        raise TypeError(f"setContenuCellule : Le second paramètre n'est pas un entier")
+        raise TypeError(f"setContenuCellule : Le second paramètre n'est pas un booleen")
     cell[const.VISIBLE] = visi
     return cell
 
@@ -105,5 +105,8 @@ def changeAnnotationCellule(cell: dict) -> None:
         cell[const.ANNOTATION] = None
 
 def reinitialiserCellule(cell: dict) -> None:
-    cell = construireCellule()
+    #cell = construireCellule()
+    cell[const.CONTENU] = 0
+    cell[const.VISIBLE] = False
+    cell[const.ANNOTATION] = None
     return None

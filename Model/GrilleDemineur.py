@@ -99,7 +99,8 @@ def getContenuGrilleDemineur(grille: list, coord: tuple) -> int:
     return getContenuCellule(getCelluleGrilleDemineur(grille, coord))
 
 def setContenuGrilleDemineur(grille: list, coord: tuple, cont: int) -> None:
-    return setContenuCellule(getCelluleGrilleDemineur(grille, coord), cont)
+    setContenuCellule(getCelluleGrilleDemineur(grille, coord), cont)
+    return None
 
 def isVisibleGrilleDemineur(grille: list, coord: tuple) -> bool:
     return isVisibleCellule(getCelluleGrilleDemineur(grille, coord))
@@ -214,29 +215,33 @@ def reinitialiserGrilleDemineur(grille: list) -> None:
             reinitialiserCellule(getCelluleGrilleDemineur(grille, (i, j)))
     return None
 
-def decouvrirGrilleDemineur(grille: list, coord: tuple, aDecouvrir = set()) -> set:
+def decouvrirGrilleDemineur(grille: list, coord: tuple) -> set:
+    aDecouvrir = set()
+    setVisibleCellule(getCelluleGrilleDemineur(grille, coord), True)
     aDecouvrir.add(coord)
     if getCelluleGrilleDemineur(grille, coord)[const.CONTENU] == 0:
         voisins = getCoordonneeVoisinsGrilleDemineur(grille, coord)
         for i in range(len(voisins)):
-            if getCelluleGrilleDemineur(grille, voisins[i])[const.CONTENU] == 0 and voisins[i] not in aDecouvrir:
-                aDecouvrir.add(voisins[i])
-                decouvrirGrilleDemineur(grille, voisins[i], aDecouvrir)
+            if getCelluleGrilleDemineur(grille, voisins[i])[const.CONTENU] == 0 and getCelluleGrilleDemineur(grille, voisins[i])[const.VISIBLE] == False:
+                Recursif = decouvrirGrilleDemineur(grille, voisins[i])
+                for cellule in Recursif:
+                    aDecouvrir.add(cellule)
     return aDecouvrir
 
-def simplifierGrilleDemineur(grille: list, coord: tuple, simple = set()):
-    if simple != ():
-        voisins = getCoordonneeVoisinsGrilleDemineur(grille, coord)
-        for i in range(len(voisins)):
-            if getCelluleGrilleDemineur(grille, voisins[i])[const.ANNOTATION] == FLAG :
-                if getCelluleGrilleDemineur(grille, voisins[i])[const.CONTENU] == FLAG :
-                    for j in range(len(voisins)):
-                        if getCelluleGrilleDemineur(grille, voisins[i])[const.VISIBLE] == False :
-                            getCelluleGrilleDemineur(grille, voisins[j])[const.VISIBLE] = True
-                            simple.add(voisins[j])
-                            simplifierGrilleDemineur(grille, voisins[j])
-    else :
-        if getCelluleGrilleDemineur(grille, coord)[const.VISIBLE] == True:
-            simple.add(coord)
-            simplifierGrilleDemineur(grille, coord, simple)
-    return simple
+#def simplifierGrilleDemineur(grille: list, coord: tuple, simple = set()):
+    #print(f"JE TESTE {simple}")
+    #if simple != ():
+        #voisins = getCoordonneeVoisinsGrilleDemineur(grille, coord)
+        #for i in range(len(voisins)):
+            #if getCelluleGrilleDemineur(grille, voisins[i])[const.ANNOTATION] == const.FLAG :
+                #if getCelluleGrilleDemineur(grille, voisins[i])[const.CONTENU] == const.FLAG :
+                    #for j in range(len(voisins)):
+                        #if getCelluleGrilleDemineur(grille, voisins[i])[const.VISIBLE] == False :
+                            #getCelluleGrilleDemineur(grille, voisins[j])[const.VISIBLE] = True
+                            #simple.add(voisins[j])
+                            #simplifierGrilleDemineur(grille, voisins[j])
+    #else:
+        #if getCelluleGrilleDemineur(grille, coord)[const.VISIBLE] == True:
+            #simple.add(coord)
+            #simplifierGrilleDemineur(grille, coord, simple)
+    #return simple
