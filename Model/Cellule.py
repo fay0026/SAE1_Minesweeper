@@ -37,7 +37,7 @@ def construireCellule(cont: int = 0, visible: bool = False) -> dict:
         raise TypeError(f"construireCellule : le second "
                         f"paramètre {type(visible)} "
                         f"n’est pas un booléen")
-    dico = {const.CONTENU : cont, const.VISIBLE : visible, const.ANNOTATION : None, const.RESOLU : False}
+    dico = {const.CONTENU : cont, const.VISIBLE : visible, const.ANNOTATION : None}
     return dico
 
 def getContenuCellule(cell: dict) -> int:
@@ -109,5 +109,4 @@ def reinitialiserCellule(cell: dict) -> None:
     cell[const.CONTENU] = 0
     cell[const.VISIBLE] = False
     cell[const.ANNOTATION] = None
-    cell[const.RESOLU] = False
     return None
