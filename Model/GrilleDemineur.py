@@ -218,6 +218,7 @@ def reinitialiserGrilleDemineur(grille: list) -> None:
 def decouvrirGrilleDemineur(grille: list, coord: tuple) -> set:
     aDecouvrir = set()
     setVisibleCellule(getCelluleGrilleDemineur(grille, coord), True)
+    getCelluleGrilleDemineur(grille, coord)[const.RESOLU] = True
     aDecouvrir.add(coord)
     if getCelluleGrilleDemineur(grille, coord)[const.CONTENU] == 0:
         voisins = getCoordonneeVoisinsGrilleDemineur(grille, coord)
@@ -228,6 +229,7 @@ def decouvrirGrilleDemineur(grille: list, coord: tuple) -> set:
                     aDecouvrir.add(cellule)
             elif getCelluleGrilleDemineur(grille, voisins[i])[const.VISIBLE] == False:
                 setVisibleCellule(getCelluleGrilleDemineur(grille, voisins[i]), True)
+                getCelluleGrilleDemineur(grille, voisins[i])[const.RESOLU] = True
                 aDecouvrir.add(voisins[i])
     return aDecouvrir
 
@@ -244,6 +246,7 @@ def simplifierGrilleDemineur(grille: list, coord: tuple) -> set:
             for j in range(len(voisins)):
                 if getCelluleGrilleDemineur(grille, voisins[j])[const.VISIBLE] == False and getCelluleGrilleDemineur(grille, voisins[j])[const.ANNOTATION] != const.FLAG:
                     getCelluleGrilleDemineur(grille, voisins[j])[const.VISIBLE] = True
+                    getCelluleGrilleDemineur(grille, voisins[j])[const.RESOLU] = True
                     Recursif = simplifierGrilleDemineur(grille, voisins[j])
                     for cellule in Recursif:
                         Simplification.add(cellule)
@@ -256,26 +259,36 @@ def ajouterFlagsGrilleDemineur(grille: list, coord: tuple) -> set:
     for i in range(len(voisins)):
         if getCelluleGrilleDemineur(grille, voisins[i])[const.VISIBLE] == False:
                 compteur += 1
-        if getCelluleGrilleDemineur(grille, coord)[const.CONTENU] == compteur :
-            for j in range(len(voisins)):
-                if getCelluleGrilleDemineur(grille, voisins[j])[const.VISIBLE] == False:
-                    getCelluleGrilleDemineur(grille, voisins[j])[const.ANNOTATION] = const.FLAG
-                    FlagsAjout.add(voisins[j])
+    if getCelluleGrilleDemineur(grille, coord)[const.CONTENU] == compteur:
+        print("RENTREE EN BOUCLE")
+        for j in range(len(voisins)):
+            if getCelluleGrilleDemineur(grille, voisins[j])[const.VISIBLE] == False:
+                getCelluleGrilleDemineur(grille, voisins[j])[const.ANNOTATION] = const.FLAG
+                getCelluleGrilleDemineur(grille, voisins[j])[const.RESOLU] = True
+                FlagsAjout.add(voisins[j])
+                print("FLAG AJOUT")
+    print(FlagsAjout)
     return FlagsAjout
 
 def simplifierToutGrilleDemineur(grille: list) -> tuple:
+    RecursifSimple = set()
     Simplification = set()
+    RecursiFlags = set()
     Flags = set()
     for i in range(getNbLignesGrilleDemineur(grille)):
         for j in range(getNbColonnesGrilleDemineur(grille)):
-            #if getCelluleGrilleDemineur(grille, (i,j))[const.RESOLU] == False:
+            if getCelluleGrilleDemineur(grille, (i,j))[const.RESOLU] == False:
                 RecursifSimple = simplifierGrilleDemineur(grille, (i,j))
                 for cellule in RecursifSimple:
                     if cellule not in Simplification:
                         Simplification.add(cellule)
+                RecursifSimple = set()
                 RecursiFlags = ajouterFlagsGrilleDemineur(grille, (i,j))
                 for Drapeau in RecursiFlags:
                     if Drapeau not in Flags:
                         Flags.add(Drapeau)
+                RecursiFlags = set()
+                print(Flags)
     MEGASIMPLE = ((Simplification),(Flags))
+    print(MEGASIMPLE)
     return MEGASIMPLE
